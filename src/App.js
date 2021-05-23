@@ -13,7 +13,6 @@ class App extends Component {
   }
 
 changeTitleHendler = (newTitle) => {
-
   this.setState({
     pageTitle: newTitle
   })
@@ -30,7 +29,7 @@ handleInput = (event) => {
       textAlign: 'center'
     }
 
-    const posts = this.state.posts
+    // const posts = this.state.posts
 
   return (
     <div style={divStyle}>
@@ -38,25 +37,24 @@ handleInput = (event) => {
 
       <input type="text" onChange={this.handleInput}/>
 
-      <button onClick={this.changeTitleHendler}>Change title</button>
+      <button 
+      onClick={this.changeTitleHendler.bind(this, 'Changed!')}
+      >Change title</button>
 
-      <Post 
-      name={posts[0].name} 
-      year={posts[0].year}
-      onChangeTitle={this.changeTitleHendler.bind(this, posts[0].name)} 
-      />
-      <Post 
-      name={posts[1].name} 
-      year={posts[1].year}
-      onChangeTitle={() => this.changeTitleHendler(posts[1].name)} 
-      />
-      <Post 
-      name={posts[2].name} 
-      year={posts[2].year}
-      onChangeTitle={() => this.changeTitleHendler(posts[2].name)} 
-      />
+      {
+        this.state.posts.map((post, index) => {
+          return (
+            <Post
+              key={index}
+              name={post.name}
+              year={post.year}
+              onChangeTitle={() => this.changeTitleHandler(post.name)} 
+            />
+          )
+        })
+      }
       </div>
-  );
+     );
   }
 }
 
