@@ -24,7 +24,14 @@ class App extends Component {
     post.name = name
     const posts = [...this.state.posts]
     posts[index] = post
-    this.setState({ posts })
+    this.setState({posts})
+  }
+
+  deleteHandler(index) {
+    const posts = this.state.posts.concat()
+    posts.splice(index, 1)
+
+    this.setState({posts})
   }
 
   render () {
@@ -41,6 +48,7 @@ class App extends Component {
           key={index}
           name={post.name}
           year={post.year}
+          onDelete={this.deleteHandler.bind(this, index)}
           onChangeName={event => this.onChangeName(event.target.value, index)} 
         />
         )
@@ -50,9 +58,12 @@ class App extends Component {
     return (
       <div style={divStyle}>
         <h1>{this.state.pageTitle}</h1>
+
         <button onClick={this.togglePostsHandler}
         >Toggle posts</button>
+
           { posts }
+
         </div>
      );
   }
