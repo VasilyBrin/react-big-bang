@@ -12,11 +12,16 @@ class App extends Component {
     pageTitle: 'React components'
   }
 
-changeTitleHendler = () => {
-  const oldTitle = this.state.pageTitle
-  const newTitle = oldTitle + ' (changed)'
+changeTitleHendler = (newTitle) => {
+
   this.setState({
     pageTitle: newTitle
+  })
+}
+
+handleInput = (event) => {
+  this.setState ({
+    pageTitle: event.target.value
   })
 }
 
@@ -30,6 +35,8 @@ changeTitleHendler = () => {
   return (
     <div style={divStyle}>
       <h1>{this.state.pageTitle}</h1>
+
+      <input type="text" onChange={this.handleInput}/>
 
       <button onClick={this.changeTitleHendler}>Change title</button>
 
