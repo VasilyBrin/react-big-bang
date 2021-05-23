@@ -61,9 +61,13 @@ class App extends Component {
 
         <button onClick={this.togglePostsHandler}
         >Toggle posts</button>
-
+        <div style={{
+          width: 400,
+          margin: 'auto',
+          paddingTop: '20px'
+        }}>
           { posts }
-
+          </div>
         </div>
      );
   }
