@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default props => (
+const Post = (props) => (
     <div>
         <h3>Post name: {props.name}</h3>
         <p>Year: <strong>{props.year}</strong></p>
@@ -9,3 +9,4 @@ export default props => (
     </div>
 )
 
+export default Post;

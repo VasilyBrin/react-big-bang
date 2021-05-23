@@ -20,36 +20,39 @@ class App extends Component {
   }
 
   changeTitleHendler = pageTitle => {
-    this.setState({ pageTitle })
+    this.setState({pageTitle})
   }
-
 
   render () {
     const divStyle = {
       textAlign: 'center'
     }
 
-  return (
-    <div style={divStyle}>
-      <h1>{this.state.pageTitle}</h1>
+    let posts = null
 
-      <button onClick={this.togglePostsHandler}
-      >Toggle posts</button>
+    if (this.state.showPosts) {
+      posts = this.state.posts.map((post, index) => {
+        return (
+        <Post
+          key={index}
+          name={post.name}
+          year={post.year}
+          onChangeTitle={() => this.changeTitleHandler(post.name)} 
+        />
+        )
+      })
+    }
 
-     {this.state.showPosts
-          ?this.state.posts.map((post, index) => {
-            return (
-              <Post
-              key={index}
-              name={post.name}
-              year={post.year}
-              onChangeTitle={() => this.changeTitleHandler(post.name)} 
-            />
-            )
-          })
-          : null
-        }
-      </div>
+    return (
+      <div style={divStyle}>
+        <h1>{this.state.pageTitle}</h1>
+
+        <button onClick={this.togglePostsHandler}
+        >Toggle posts</button>
+
+          { posts }
+
+        </div>
      );
   }
 }
