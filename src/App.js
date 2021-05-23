@@ -19,8 +19,12 @@ class App extends Component {
     })
   }
 
-  changeTitleHendler = pageTitle => {
-    this.setState({pageTitle})
+  onChangeName(name, index) {
+    const post = this.state.posts[index]
+    post.name = name
+    const posts = [...this.state.posts]
+    posts[index] = post
+    this.setState({ posts })
   }
 
   render () {
@@ -37,7 +41,7 @@ class App extends Component {
           key={index}
           name={post.name}
           year={post.year}
-          onChangeTitle={() => this.changeTitleHandler(post.name)} 
+          onChangeName={event => this.onChangeName(event.target.value, index)} 
         />
         )
       })
@@ -46,12 +50,9 @@ class App extends Component {
     return (
       <div style={divStyle}>
         <h1>{this.state.pageTitle}</h1>
-
         <button onClick={this.togglePostsHandler}
         >Toggle posts</button>
-
           { posts }
-
         </div>
      );
   }
