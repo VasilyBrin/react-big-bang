@@ -9,50 +9,46 @@ class App extends Component {
       {name: 'Kate', year: 1996},
       {name: 'Alex', year: 1986}
     ],
-    pageTitle: 'React components'
+    pageTitle: 'React components',
+    showPosts: false
   }
 
-changeTitleHendler = (newTitle) => {
-  this.setState({
-    pageTitle: newTitle
-  })
-}
+  togglePostsHandler = () => {
+    this.setState ({
+      showPosts: !this.state.showPosts
+    })
+  }
 
-handleInput = (event) => {
-  this.setState ({
-    pageTitle: event.target.value
-  })
-}
+  changeTitleHendler = pageTitle => {
+    this.setState({ pageTitle })
+  }
+
 
   render () {
     const divStyle = {
       textAlign: 'center'
     }
 
-    // const posts = this.state.posts
-
   return (
     <div style={divStyle}>
       <h1>{this.state.pageTitle}</h1>
 
-      <input type="text" onChange={this.handleInput}/>
+      <button onClick={this.togglePostsHandler}
+      >Toggle posts</button>
 
-      <button 
-      onClick={this.changeTitleHendler.bind(this, 'Changed!')}
-      >Change title</button>
-
-      {
-        this.state.posts.map((post, index) => {
-          return (
-            <Post
+     {this.state.showPosts
+          ?this.state.posts.map((post, index) => {
+            return (
+              <Post
               key={index}
               name={post.name}
               year={post.year}
               onChangeTitle={() => this.changeTitleHandler(post.name)} 
             />
-          )
-        })
-      }
+            )
+          })
+          : null
+        }
       </div>
      );
   }
