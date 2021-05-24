@@ -1,4 +1,5 @@
 import React from 'react'
+import Radium from 'radium'
 import './Post.css';
 
 const Post = (props) => {
@@ -13,8 +14,18 @@ const Post = (props) => {
     if (props.name.lenght > 4) { 
         inputClasses.push('bold')
     }
+
+    const style = {
+        border: '1px solid #ccc',
+        boxShadow: '0 4px 5px 0 rgba(0, 0, 0, .14)',
+        ':hover': {
+            border: '1px solid #aaa',
+            boxShadow: '0 4px 15px 0 rgba(0, 0, 0, .25)'
+        }
+    }
+
     return (
-        <div className="Post">
+        <div className="Post" style={style}>
             <h3>Post name: {props.name}</h3>
             <p>Year: <strong>{props.year}</strong></p>
             <input type="text" 
@@ -27,4 +38,4 @@ const Post = (props) => {
     )
 }
 
-export default Post;
+export default Radium(Post);
